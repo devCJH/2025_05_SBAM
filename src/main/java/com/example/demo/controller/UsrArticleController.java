@@ -20,9 +20,9 @@ public class UsrArticleController {
 	
 	@GetMapping("/usr/article/write")
 	@ResponseBody
-	public String write(String title, String body) {
+	public String write(String title, String content) {
 		
-		this.articleService.writeArticle(title, body);
+		this.articleService.writeArticle(title, content);
 		
 		return String.format("게시물이 생성되었습니다.");
 	}
@@ -55,15 +55,15 @@ public class UsrArticleController {
 	
 	@GetMapping("/usr/article/modify")
 	@ResponseBody
-	public String modify(int id, String title, String body) {
+	public String modify(int id, String title, String content) {
 		
-		Article article = this.articleService.getArticleById(id);
+//		Article article = this.articleService.getArticleById(id);
+//		
+//		if (article == null) {
+//			return String.format("%d번 게시물은 존재하지 않습니다", id);
+//		}
 		
-		if (article == null) {
-			return String.format("%d번 게시물은 존재하지 않습니다", id);
-		}
-		
-		this.articleService.modifyArticle(article, title, body);
+		this.articleService.modifyArticle(id, title, content);
 		
 		return String.format("%d번 게시물을 수정했습니다", id);
 	}
@@ -72,13 +72,13 @@ public class UsrArticleController {
 	@ResponseBody
 	public String delete(int id) {
 		
-		Article article = this.articleService.getArticleById(id);
+//		Article article = this.articleService.getArticleById(id);
+//		
+//		if (article == null) {
+//			return String.format("%d번 게시물은 존재하지 않습니다", id);
+//		}
 		
-		if (article == null) {
-			return String.format("%d번 게시물은 존재하지 않습니다", id);
-		}
-		
-		this.articleService.deleteArticle(article);
+		this.articleService.deleteArticle(id);
 		
 		return String.format("%d번 게시물을 삭제했습니다", id);
 	}

@@ -16,8 +16,8 @@ public class ArticleService {
 		this.articleDao = articleDao;
 	}
 
-	public int writeArticle(String title, String body) {
-		return this.articleDao.writeArticle(title, body);
+	public int writeArticle(String title, String content) {
+		return this.articleDao.writeArticle(title, content);
 	}
 
 	public List<Article> getArticles() {
@@ -28,11 +28,11 @@ public class ArticleService {
 		return this.articleDao.getArticleById(id);
 	}
 
-	public void modifyArticle(Article article, String title, String body) {
-		this.articleDao.modifyArticle(article, title, body);
+	public void modifyArticle(int id, String title, String content) {
+		this.articleDao.modifyArticle(id, title, content);
 	}
 
-	public void deleteArticle(Article article) {
-		this.articleDao.deleteArticle(article);
+	public void deleteArticle(int id) {
+		this.articleDao.deleteArticle(id);
 	}
 }
