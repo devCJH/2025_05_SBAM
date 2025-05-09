@@ -1,46 +1,29 @@
 package com.example.demo.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.dto.Article;
 
-@Component
-public class ArticleDao {
-	private List<Article> articles;
-	private int lastArticleId;
+@Mapper
+public interface ArticleDao {
 	
-	public ArticleDao() {
-		this.articles = new ArrayList<>();
-		this.lastArticleId = 0;
-	}
+	@Insert("""
+			INSERT INTO article
+			    SET regDate = NOW()
+			        , updateDate = NOW()
+			        , title = #{title}
+			        , content = #{body}
+			""")
+	public int writeArticle(String title, String body);
 
-	public int writeArticle(String title, String body) {
-		this.articles.add(new Article(++lastArticleId, title, body));
-		return lastArticleId;
-	}
-
-	public List<Article> getArticles() {
-		return this.articles;
-	}
+	public List<Article> getArticles();
 	
-	public Article getArticleById(int id) {
-		for (Article article : articles) {
-			if (article.getId() == id) {
-				return article;
-			}
-		}
-		return null;
-	}
+	public Article getArticleById(int id);
 
-	public void modifyArticle(Article article, String title, String body) {
-		article.setTitle(title);
-		article.setBody(body);
-	}
+	public void modifyArticle(Article article, String title, String body);
 
-	public void deleteArticle(Article article) {
-		this.articles.remove(article);
-	}
+	public void deleteArticle(Article article);
 }

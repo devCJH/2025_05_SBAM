@@ -22,9 +22,9 @@ public class UsrArticleController {
 	@ResponseBody
 	public String write(String title, String body) {
 		
-		int id = this.articleService.writeArticle(title, body);
+		this.articleService.writeArticle(title, body);
 		
-		return String.format("%d번 게시물이 생성되었습니다.", id);
+		return String.format("게시물이 생성되었습니다.");
 	}
 	
 	@GetMapping("/usr/article/list")
