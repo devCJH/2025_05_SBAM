@@ -25,4 +25,22 @@ public class ArticleDao {
 	public List<Article> getArticles() {
 		return this.articles;
 	}
+	
+	public Article getArticleById(int id) {
+		for (Article article : articles) {
+			if (article.getId() == id) {
+				return article;
+			}
+		}
+		return null;
+	}
+
+	public void modifyArticle(Article article, String title, String body) {
+		article.setTitle(title);
+		article.setBody(body);
+	}
+
+	public void deleteArticle(Article article) {
+		this.articles.remove(article);
+	}
 }

@@ -27,10 +27,59 @@ public class UsrArticleController {
 		return String.format("%d번 게시물이 생성되었습니다.", id);
 	}
 	
-	@GetMapping("/usr/article/test")
+	@GetMapping("/usr/article/list")
 	@ResponseBody
-	public List<Article> test() {
-		return this.articleService.getArticles();
+	public Object list() {
+		
+		List<Article> articles = this.articleService.getArticles();
+		
+		if (articles.size() == 0) {
+			return "게시물이 존재하지 않습니다";
+		}
+		
+		return articles;
 	}
 	
+	@GetMapping("/usr/article/detail")
+	@ResponseBody
+	public Object detail(int id) {
+		
+		Article article = this.articleService.getArticleById(id);
+		
+		if (article == null) {
+			return String.format("%d번 게시물은 존재하지 않습니다", id);
+		}
+		
+		return article;
+	}
+	
+	@GetMapping("/usr/article/modify")
+	@ResponseBody
+	public String modify(int id, String title, String body) {
+		
+		Article article = this.articleService.getArticleById(id);
+		
+		if (article == null) {
+			return String.format("%d번 게시물은 존재하지 않습니다", id);
+		}
+		
+		this.articleService.modifyArticle(article, title, body);
+		
+		return String.format("%d번 게시물을 수정했습니다", id);
+	}
+	
+	@GetMapping("/usr/article/delete")
+	@ResponseBody
+	public String delete(int id) {
+		
+		Article article = this.articleService.getArticleById(id);
+		
+		if (article == null) {
+			return String.format("%d번 게시물은 존재하지 않습니다", id);
+		}
+		
+		this.articleService.deleteArticle(article);
+		
+		return String.format("%d번 게시물을 삭제했습니다", id);
+	}
 }
