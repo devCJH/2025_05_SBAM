@@ -29,6 +29,11 @@ public interface ArticleDao {
 			""")
 	public List<Article> getArticles();
 	
+	@Select("""
+			SELECT *
+				FROM article
+				WHERE id = #{id}
+			""")
 	public Article getArticleById(int id);
 
 	@Update("""
