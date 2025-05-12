@@ -38,7 +38,7 @@ public class UsrArticleController {
 		return "usr/article/list";
 	}
 	
-	@GetMapping("/usr/article/detail")
+	@GetMapping("/usr/article/test/detail")
 	@ResponseBody
 	public Object detail(int id) {
 		

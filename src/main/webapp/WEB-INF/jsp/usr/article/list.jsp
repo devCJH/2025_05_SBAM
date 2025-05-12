@@ -11,6 +11,14 @@
 <body>
 	<div>게시물 목록</div>
 	
+	<div>
+		<div><a href="/">로고</a></div>
+		<ul>
+			<li><a href="/">HOME</a></li>
+			<li><a href="/usr/article/list">LIST</a></li>
+		</ul>
+	</div>
+	
 	<table border=1>
 		<thead>
 			<tr>

@@ -10,5 +10,18 @@
 </head>
 <body>
 	<div>메인페이지</div>
+	
+	<div>
+		<div><a href="/">로고</a></div>
+		
+		<ul>
+			<li><a href="/">HOME</a></li>
+			<li><a href="/usr/article/list">LIST</a></li>
+		</ul>
+	</div>
+	
+	<section>
+		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex quam similique assumenda libero eligendi magni nulla officia doloremque sit nisi animi quaerat hic voluptatibus possimus necessitatibus nemo consectetur molestiae pariatur?</div>
+	</section>
 </body>
 </html>
