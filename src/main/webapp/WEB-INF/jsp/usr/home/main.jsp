@@ -9,7 +9,6 @@
 <title>메인</title>
 </head>
 <body>
-	<div>${a }</div>
 	<div>메인페이지</div>
 </body>
 </html>

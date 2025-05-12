@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,16 +29,13 @@ public class UsrArticleController {
 	}
 	
 	@GetMapping("/usr/article/list")
-	@ResponseBody
-	public Object list() {
+	public String list(Model model) {
 		
 		List<Article> articles = this.articleService.getArticles();
 		
-		if (articles.size() == 0) {
-			return "게시물이 존재하지 않습니다";
-		}
+		model.addAttribute("articles", articles);
 		
-		return articles;
+		return "usr/article/list";
 	}
 	
 	@GetMapping("/usr/article/detail")
