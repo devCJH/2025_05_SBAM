@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.dto.Article;
@@ -19,8 +20,13 @@ public interface ArticleDao {
 			        , title = #{title}
 			        , content = #{content}
 			""")
-	public int writeArticle(String title, String content);
+	public void writeArticle(String title, String content);
 
+	@Select("""
+			SELECT *
+				FROM article
+				ORDER BY id DESC
+			""")
 	public List<Article> getArticles();
 	
 	public Article getArticleById(int id);
