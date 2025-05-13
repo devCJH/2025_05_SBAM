@@ -38,17 +38,14 @@ public class UsrArticleController {
 		return "usr/article/list";
 	}
 	
-	@GetMapping("/usr/article/test/detail")
-	@ResponseBody
-	public Object detail(int id) {
+	@GetMapping("/usr/article/detail")
+	public Object detail(Model model, int id) {
 		
 		Article article = this.articleService.getArticleById(id);
 		
-		if (article == null) {
-			return String.format("%d번 게시물은 존재하지 않습니다", id);
-		}
+		model.addAttribute("article", article);
 		
-		return article;
+		return "usr/article/detail";
 	}
 	
 	@GetMapping("/usr/article/modify")
