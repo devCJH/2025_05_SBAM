@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.Article;
 import com.example.demo.service.ArticleService;
+import com.example.demo.util.Util;
 
 @Controller
 public class UsrArticleController {
@@ -67,14 +68,8 @@ public class UsrArticleController {
 	@ResponseBody
 	public String delete(int id) {
 		
-//		Article article = this.articleService.getArticleById(id);
-//		
-//		if (article == null) {
-//			return String.format("%d번 게시물은 존재하지 않습니다", id);
-//		}
-		
 		this.articleService.deleteArticle(id);
 		
-		return String.format("%d번 게시물을 삭제했습니다", id);
+		return Util.jsReplace(String.format("%d번 게시글이 삭제되었습니다", id), "list");
 	}
 }
