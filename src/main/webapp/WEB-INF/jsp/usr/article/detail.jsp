@@ -2,22 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>상세보기</title>
-</head>
-<body>
-	<div>게시물 상세보기</div>
-	
-	<div>
-		<div><a href="/">로고</a></div>
-		<ul>
-			<li><a href="/">HOME</a></li>
-			<li><a href="/usr/article/list">LIST</a></li>
-		</ul>
-	</div>
+<c:set var="pageTitle" value="상세보기" />
+
+<%@ include file="/WEB-INF/jsp/common/header.jsp" %>
 	
 	<table border=1>
 		<tr>
@@ -45,5 +32,5 @@
 	<div>
 		<div><button onclick="history.back();">뒤로가기</button></div>
 	</div>
-</body>
-</html>
+	
+<%@ include file="/WEB-INF/jsp/common/footer.jsp" %>

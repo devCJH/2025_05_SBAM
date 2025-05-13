@@ -2,26 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>메인</title>
-</head>
-<body>
-	<div>메인페이지</div>
-	
-	<div>
-		<div><a href="/">로고</a></div>
-		
-		<ul>
-			<li><a href="/">HOME</a></li>
-			<li><a href="/usr/article/list">LIST</a></li>
-		</ul>
-	</div>
-	
+<c:set var="pageTitle" value="메인" />
+
+<%@ include file="/WEB-INF/jsp/common/header.jsp" %>
+
 	<section>
 		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex quam similique assumenda libero eligendi magni nulla officia doloremque sit nisi animi quaerat hic voluptatibus possimus necessitatibus nemo consectetur molestiae pariatur?</div>
 	</section>
-</body>
-</html>
+
+<%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
