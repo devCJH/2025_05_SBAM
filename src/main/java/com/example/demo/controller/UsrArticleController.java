@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.Article;
@@ -21,12 +22,19 @@ public class UsrArticleController {
 	}
 	
 	@GetMapping("/usr/article/write")
+	public String write() {
+		return "usr/article/write";
+	}
+	
+	@PostMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String write(String title, String content) {
+	public String doWrite(String title, String content) {
 		
 		this.articleService.writeArticle(title, content);
 		
-		return String.format("게시물이 생성되었습니다.");
+		int id = this.articleService.getLastArticleId();
+		
+		return Util.jsReplace("게시글 작성!", String.format("detail?id=%d", id));
 	}
 	
 	@GetMapping("/usr/article/list")

@@ -35,4 +35,8 @@ public class ArticleService {
 	public void deleteArticle(int id) {
 		this.articleDao.deleteArticle(id);
 	}
+
+	public int getLastArticleId() {
+		return this.articleDao.getLastArticleId();
+	}
 }

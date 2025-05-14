@@ -17,14 +17,14 @@ html * {
 	text-align: center;
 }
 
-.btns button, .btns a {
+.btns button, .btns a, .submitBtn {
 	padding: 5px;
 	border: 2px solid black;
 	cursor: pointer;
 	border-radius: 8px;
 }
 
-.btns button:hover, .btns a:hover {
+.btns button:hover, .btns a:hover, .submitBtn:hover {
 	background-color: black;
 	color: white;
 }

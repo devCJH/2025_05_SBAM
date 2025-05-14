@@ -28,6 +28,10 @@
 					</tbody>
 				</table>
 			</div>
+			
+			<div class="mt-3 text-sm btns flex">
+				<div><a class="block" href="write">글쓰기</a></div>
+			</div>
 		</div>
 	</section>
 	
