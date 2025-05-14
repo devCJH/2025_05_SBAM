@@ -58,18 +58,22 @@ public class UsrArticleController {
 	}
 	
 	@GetMapping("/usr/article/modify")
-	@ResponseBody
-	public String modify(int id, String title, String content) {
+	public String modify(Model model, int id) {
 		
-//		Article article = this.articleService.getArticleById(id);
-//		
-//		if (article == null) {
-//			return String.format("%d번 게시물은 존재하지 않습니다", id);
-//		}
+		Article article = this.articleService.getArticleById(id);
+		
+		model.addAttribute("article", article);
+		
+		return "usr/article/modify";
+	}
+	
+	@PostMapping("/usr/article/doModify")
+	@ResponseBody
+	public String doModify(int id, String title, String content) {
 		
 		this.articleService.modifyArticle(id, title, content);
 		
-		return String.format("%d번 게시물을 수정했습니다", id);
+		return Util.jsReplace(String.format("%d번 게시물을 수정했습니다", id), String.format("detail?id=%d", id));
 	}
 	
 	@GetMapping("/usr/article/delete")
