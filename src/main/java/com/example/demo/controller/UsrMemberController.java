@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,9 +42,9 @@ public class UsrMemberController {
 		Member member = this.memberService.getMemberByLoginId(loginId);
 		
 		if (member != null) {
-			return new ResultData("F-1", String.format("[ %s ] 은(는) 이미 사용중인 아이디입니다", loginId));
+			return ResultData.from("F-1", String.format("[ %s ] 은(는) 이미 사용중인 아이디입니다", loginId));
 		}
 		
-		return new ResultData("S-1", String.format("[ %s ] 은(는) 사용가능한 아이디입니다", loginId));
+		return ResultData.from("S-1", String.format("[ %s ] 은(는) 사용가능한 아이디입니다", loginId));
 	}
 }
