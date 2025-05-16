@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.dto.Member;
+import com.example.demo.dto.ResultData;
 import com.example.demo.service.MemberService;
 import com.example.demo.util.Util;
 
@@ -29,5 +31,18 @@ public class UsrMemberController {
 		this.memberService.joinMember(loginId, loginPw, name);
 		
 		return Util.jsReplace(String.format("[ %s ] 님의 가입이 완료되었습니다", name), "/");
+	}
+	
+	@GetMapping("/usr/member/loginIdDupChk")
+	@ResponseBody
+	public ResultData loginIdDupChk(String loginId) {
+		
+		Member member = this.memberService.getMemberByLoginId(loginId);
+		
+		if (member != null) {
+			return new ResultData("F-1", String.format("[ %s ] 은(는) 이미 사용중인 아이디입니다", loginId));
+		}
+		
+		return new ResultData("S-1", String.format("[ %s ] 은(는) 사용가능한 아이디입니다", loginId));
 	}
 }

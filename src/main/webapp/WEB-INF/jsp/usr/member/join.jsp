@@ -7,6 +7,9 @@
 <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
 
 	<script>
+	
+		let validLoginId = null;
+	
 		const joinFormChk = function (form) {
 			form.loginId.value = form.loginId.value.trim();
 			form.loginPw.value = form.loginPw.value.trim();
@@ -15,6 +18,13 @@
 			
 			if (form.loginId.value.length == 0) {
 				alert('아이디는 필수 입력 정보입니다');
+				form.loginId.focus();
+				return false;
+			}
+			
+			if (form.loginId.value != validLoginId) {
+				alert('[ ' + form.loginId.value + ' ] 은(는) 사용할 수 없는 아이디입니다.');
+				form.loginId.value = '';
 				form.loginId.focus();
 				return false;
 			}
@@ -41,6 +51,44 @@
 			
 			return true;
 		}
+		
+		const loginIdDupChk = function (el) {
+			el.value = el.value.trim();
+			
+			let loginIdDupChkMsg = $('#loginIdDupChkMsg');
+			
+			if (el.value.length == 0) {
+				loginIdDupChkMsg.removeClass('text-green-500');
+				loginIdDupChkMsg.addClass('text-red-500');
+				loginIdDupChkMsg.html('아이디는 필수 입력 정보입니다');
+				return;
+			}
+			
+			$.ajax({
+				url : '/usr/member/loginIdDupChk',
+				type : 'GET',
+				data : {
+					loginId : el.value
+				},
+				dataType : 'json',
+				success : function (data) {
+					if (data.success) {
+						loginIdDupChkMsg.removeClass('text-red-500');
+						loginIdDupChkMsg.addClass('text-green-500');
+						loginIdDupChkMsg.html(`\${data.rsMsg}`);
+						validLoginId = el.value;
+					} else {
+						loginIdDupChkMsg.removeClass('text-green-500');
+						loginIdDupChkMsg.addClass('text-red-500');
+						loginIdDupChkMsg.html(`\${data.rsMsg}`);
+						validLoginId = null;
+					}
+				},
+				error : function (xhr, status, error) {
+					console.log(error);
+				}
+			})
+		}
 	</script>
 
 	<section class="mt-8">
@@ -50,7 +98,10 @@
 					<table class="w-full">
 						<tr>
 							<th>아이디</th>
-							<td><input class="border w-full" name="loginId" type="text" /></td>
+							<td>
+								<input class="border w-full" name="loginId" type="text" onblur="loginIdDupChk(this);"/>
+								<div id="loginIdDupChkMsg" class="mt-2 text-sm h-5 text-left"></div>
+							</td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>

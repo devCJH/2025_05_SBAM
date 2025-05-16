@@ -3,6 +3,7 @@ package com.example.demo.service;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.MemberDao;
+import com.example.demo.dto.Member;
 
 @Service
 public class MemberService {
@@ -15,6 +16,10 @@ public class MemberService {
 
 	public void joinMember(String loginId, String loginPw, String name) {
 		this.memberDao.joinMember(loginId, loginPw, name);
+	}
+
+	public Member getMemberByLoginId(String loginId) {
+		return this.memberDao.getMemberByLoginId(loginId);
 	}
 
 }
