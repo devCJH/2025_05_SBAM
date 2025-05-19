@@ -23,6 +23,10 @@
 						<td>${article.getUpdateDate().substring(2, 16) }</td>
 					</tr>
 					<tr>
+						<th>작성자</th>
+						<td>${article.getWriterName() }</td>
+					</tr>
+					<tr>
 						<th>제목</th>
 						<td>${article.getTitle() }</td>
 					</tr>

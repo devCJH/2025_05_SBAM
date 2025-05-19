@@ -14,6 +14,7 @@
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
+							<th>작성자</th>
 							<th>작성일</th>
 						</tr>
 					</thead>
@@ -22,6 +23,7 @@
 							<tr>
 								<td>${article.getId() }</td>
 								<td class="hover:underline underline-offset-4"><a href="detail?id=${article.getId() }">${article.getTitle() }</a></td>
+								<td>${article.getWriterName() }</td>
 								<td>${article.getRegDate().substring(2, 16) }</td>
 							</tr>
 						</c:forEach>
@@ -29,9 +31,11 @@
 				</table>
 			</div>
 			
-			<div class="mt-3 text-sm btns flex">
-				<div><a class="block" href="write">글쓰기</a></div>
-			</div>
+			<c:if test="${sessionScope.loginedMemberId != null }">
+				<div class="mt-3 text-sm btns flex">
+					<div><a class="block" href="write">글쓰기</a></div>
+				</div>
+			</c:if>
 		</div>
 	</section>
 	
