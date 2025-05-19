@@ -39,8 +39,10 @@
 			
 			<div class="mt-3 text-sm btns flex">
 				<div><button onclick="history.back();">뒤로가기</button></div>
-				<div class="mx-2"><a class="block" href="modify?id=${article.getId() }">수정</a></div>
-				<div><a class="block" href="delete?id=${article.getId() }" onclick="if(confirm('정말로 삭제하시겠습니까?') == false) return false;">삭제</a></div>
+				<c:if test="${article.getMemberId() == sessionScope.loginedMemberId }">
+					<div class="mx-2"><a class="block" href="modify?id=${article.getId() }">수정</a></div>
+					<div><a class="block" href="delete?id=${article.getId() }" onclick="if(confirm('정말로 삭제하시겠습니까?') == false) return false;">삭제</a></div>
+				</c:if>
 			</div>
 		</div>
 	</section>
