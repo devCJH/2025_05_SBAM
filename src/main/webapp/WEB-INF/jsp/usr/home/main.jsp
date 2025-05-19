@@ -12,7 +12,6 @@
 			<div>안녕하세요</div>
 			
 			<div>${sessionScope }</div>
-			
 		</div>
 	</section>
 

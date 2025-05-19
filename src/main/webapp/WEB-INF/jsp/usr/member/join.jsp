@@ -31,13 +31,13 @@
 			
 			if (form.loginPw.value.length == 0) {
 				alert('비밀번호는 필수 입력 정보입니다');
-				form.loginId.focus();
+				form.loginPw.focus();
 				return false;
 			}
 			
 			if (form.name.value.length == 0) {
 				alert('이름은 필수 입력 정보입니다');
-				form.loginId.focus();
+				form.name.focus();
 				return false;
 			}
 			
