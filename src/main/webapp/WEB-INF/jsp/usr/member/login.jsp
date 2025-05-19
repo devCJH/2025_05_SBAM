@@ -31,24 +31,61 @@
 		<div class="container mx-auto">
 			<form action="doLogin" method="post" onsubmit="return loginFormChk(this);">
 				<div class="table-box">
-					<table class="w-full">
+					<table class="table">
 						<tr>
-							<th>아이디</th>
-							<td><input class="border w-full" name="loginId" type="text" /></td>
+							<td colspan="2">
+								<label class="input">
+								  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								    <g
+								      stroke-linejoin="round"
+								      stroke-linecap="round"
+								      stroke-width="2.5"
+								      fill="none"
+								      stroke="currentColor"
+								    >
+								      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+								      <circle cx="12" cy="7" r="4"></circle>
+								    </g>
+								  </svg>
+								  <input
+								    type="text"
+								    name="loginId"
+								  />
+								</label>
+							</td>
 						</tr>
 						<tr>
-							<th>비밀번호</th>
-							<td><input class="border w-full" name="loginPw" type="text" /></td>
+							<td colspan="2">
+								<label class="input">
+								  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								    <g
+								      stroke-linejoin="round"
+								      stroke-linecap="round"
+								      stroke-width="2.5"
+								      fill="none"
+								      stroke="currentColor"
+								    >
+								      <path
+								        d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"
+								      ></path>
+								      <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+								    </g>
+								  </svg>
+								  <input
+								    type="password"
+								    name="loginPw"
+								  />
+							</td>
 						</tr>
 						<tr>
-							<td colspan="2"><button class="submitBtn w-32">로그인</button></td>
+							<td colspan="2"><button class="btn btn-neutral btn-outline btn-sm btn-wide">로그인</button></td>
 						</tr>
 					</table>
 				</div>
 			</form>
 			
-			<div class="mt-3 text-sm btns flex">
-				<div class="mr-2"><button onclick="history.back();">뒤로가기</button></div>
+			<div class="bg-white p-6">
+				<div><button class="btn btn-neutral btn-outline btn-xs" onclick="history.back();">뒤로가기</button></div>
 			</div>
 		</div>
 	</section>

@@ -12,19 +12,18 @@ html * {
 }
 
 .table-box th, .table-box td {
-	border: 1px solid black;
 	padding: 10px;
 	text-align: center;
 }
 
-.btns button, .btns a, .submitBtn {
-	padding: 5px;
-	border: 2px solid black;
-	cursor: pointer;
-	border-radius: 8px;
-}
+/* .btns button, .btns a, .submitBtn { */
+/* 	padding: 5px; */
+/* 	border: 2px solid black; */
+/* 	cursor: pointer; */
+/* 	border-radius: 8px; */
+/* } */
 
-.btns button:hover, .btns a:hover, .submitBtn:hover {
-	background-color: black;
-	color: white;
-}
+/* .btns button:hover, .btns a:hover, .submitBtn:hover { */
+/* 	background-color: black; */
+/* 	color: white; */
+/* } */

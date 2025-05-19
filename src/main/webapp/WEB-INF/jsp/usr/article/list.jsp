@@ -9,7 +9,7 @@
 	<section class="mt-8">
 		<div class="container mx-auto">
 			<div class="table-box">
-				<table class="w-full">
+				<table class="table">
 					<thead>
 						<tr>
 							<th>번호</th>
@@ -20,7 +20,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${articles }" var="article">
-							<tr>
+							<tr class="hover:bg-base-300">
 								<td>${article.getId() }</td>
 								<td class="hover:underline underline-offset-4"><a href="detail?id=${article.getId() }">${article.getTitle() }</a></td>
 								<td>${article.getWriterName() }</td>
@@ -32,8 +32,8 @@
 			</div>
 			
 			<c:if test="${sessionScope.loginedMemberId != null }">
-				<div class="mt-3 text-sm btns flex">
-					<div><a class="block" href="write">글쓰기</a></div>
+				<div class="bg-white p-6">
+					<div><a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a></div>
 				</div>
 			</c:if>
 		</div>
