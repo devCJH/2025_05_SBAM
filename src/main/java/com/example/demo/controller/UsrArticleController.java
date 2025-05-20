@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.Article;
+import com.example.demo.dto.Req;
 import com.example.demo.service.ArticleService;
 import com.example.demo.util.Util;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UsrArticleController {
 	
 	private ArticleService articleService;
+	private Req req;
 	
-	public UsrArticleController(ArticleService articleService) {
+	public UsrArticleController(ArticleService articleService, Req req) {
 		this.articleService = articleService;
+		this.req = req;
 	}
 	
 	@GetMapping("/usr/article/write")
@@ -31,11 +31,9 @@ public class UsrArticleController {
 	
 	@PostMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(HttpServletRequest req, String title, String content) {
+	public String doWrite(String title, String content) {
 		
-		HttpSession session = req.getSession();
-		
-		this.articleService.writeArticle(title, content, (int) session.getAttribute("loginedMemberId"));
+		this.articleService.writeArticle(title, content, this.req.getLoginedMemberId());
 		
 		int id = this.articleService.getLastArticleId();
 		

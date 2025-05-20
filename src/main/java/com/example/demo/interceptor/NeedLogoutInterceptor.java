@@ -11,11 +11,15 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class NeedLogoutInterceptor implements HandlerInterceptor {
 	
+	private Req req;
+	
+	public NeedLogoutInterceptor(Req req) {
+		this.req = req;
+	}
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		Req req = (Req) request.getAttribute("req");
 		
 		if (req.getLoginedMemberId() != -1) {
 			req.jsPrintReplace("로그아웃 후 이용해주세요", "/");

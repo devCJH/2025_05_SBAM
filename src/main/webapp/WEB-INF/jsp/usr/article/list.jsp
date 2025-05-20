@@ -31,7 +31,7 @@
 				</table>
 			</div>
 			
-			<c:if test="${sessionScope.loginedMemberId != null }">
+			<c:if test="${req.getLoginedMemberId() != -1 }">
 				<div class="bg-white p-6">
 					<div><a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a></div>
 				</div>

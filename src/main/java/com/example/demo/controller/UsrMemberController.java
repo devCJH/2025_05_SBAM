@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.Member;
+import com.example.demo.dto.Req;
 import com.example.demo.dto.ResultData;
 import com.example.demo.service.MemberService;
 import com.example.demo.util.Util;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UsrMemberController {
 	
 	private MemberService memberService;
+	private Req req;
 	
-	public UsrMemberController(MemberService memberService) {
+	public UsrMemberController(MemberService memberService, Req req) {
 		this.memberService = memberService;
+		this.req = req;
 	}
 	
 	@GetMapping("/usr/member/join")
@@ -56,7 +56,7 @@ public class UsrMemberController {
 	
 	@PostMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(HttpServletRequest req, String loginId, String loginPw) {
+	public String doLogin(String loginId, String loginPw) {
 		
 		Member member = this.memberService.getMemberByLoginId(loginId);
 		
@@ -68,18 +68,16 @@ public class UsrMemberController {
 			return Util.jsReplace("비밀번호가 일치하지 않습니다", "login");
 		}
 		
-		HttpSession session = req.getSession();
-		session.setAttribute("loginedMemberId", member.getId());
+		this.req.login(member.getId());
 		
 		return Util.jsReplace(String.format("[ %s ] 님 환영합니다", member.getLoginId()), "/");
 	}
 	
 	@GetMapping("/usr/member/logout")
 	@ResponseBody
-	public String logout(HttpServletRequest req) {
+	public String logout() {
 		
-		HttpSession session = req.getSession();
-		session.removeAttribute("loginedMemberId");
+		this.req.logout();
 		
 		return Util.jsReplace("정상적으로 로그아웃 되었습니다", "/");
 	}

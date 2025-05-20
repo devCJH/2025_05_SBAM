@@ -11,13 +11,17 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class BeforeActionInterceptor implements HandlerInterceptor {
 	
+	private Req req;
+	
+	public BeforeActionInterceptor(Req req) {
+		this.req = req;
+	}
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		Req req = new Req(request, response);
-		
-		request.setAttribute("req", req);
+		req.init();
 		
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}

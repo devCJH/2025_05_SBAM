@@ -39,7 +39,7 @@
 			
 			<div class="bg-white p-6 flex justify-between">
 				<div><button class="btn btn-neutral btn-outline btn-xs" onclick="history.back();">뒤로가기</button></div>
-				<c:if test="${article.getMemberId() == sessionScope.loginedMemberId }">
+				<c:if test="${article.getMemberId() == req.getLoginedMemberId() }">
 					<div class="flex">
 						<div class="mr-2"><a class="btn btn-neutral btn-outline btn-xs" href="modify?id=${article.getId() }">수정</a></div>
 						<div><a class="btn btn-neutral btn-outline btn-xs" href="delete?id=${article.getId() }" onclick="if(confirm('정말로 삭제하시겠습니까?') == false) return false;">삭제</a></div>
