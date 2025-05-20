@@ -11,6 +11,7 @@ CREATE TABLE article(
 );
 
 ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
+ALTER TABLE article ADD COLUMN boardId INT UNSIGNED NOT NULL AFTER memberId;
 
 CREATE TABLE `member`(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
@@ -21,17 +22,24 @@ CREATE TABLE `member`(
     , `name` VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE board(
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+    , `name` VARCHAR(50) NOT NULL
+);
+
 INSERT INTO article
     SET regDate = NOW()
         , updateDate = NOW()
         , memberId = 1
-        , title = '제목1'
-        , content = '내용1';
+        , boardId = 1
+        , title = '공지1'
+        , content = '공지내용1';
         
 INSERT INTO article
     SET regDate = NOW()
         , updateDate = NOW()
         , memberId = 1
+        , boardId = 2
         , title = '제목2'
         , content = '내용2';
 
@@ -39,6 +47,7 @@ INSERT INTO article
     SET regDate = NOW()
         , updateDate = NOW()
         , memberId = 2
+        , boardId = 3
         , title = '제목3'
         , content = '내용3';
 
@@ -55,6 +64,16 @@ INSERT INTO `member`
         , loginId = 'test2'
         , loginPw = 'test2'
         , `name` = '유저2';
+        
+INSERT INTO board
+    SET `name` = '공지사항';
+
+INSERT INTO board
+    SET `name` = '자유';
+    
+INSERT INTO board
+    SET `name` = '질문과 답변';
 
 SELECT * FROM article;
 SELECT * FROM `member`;
+SELECT * FROM board;

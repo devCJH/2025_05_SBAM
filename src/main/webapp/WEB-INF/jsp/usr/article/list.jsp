@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="목록" />
+<c:set var="pageTitle" value="${boardName } 게시판" />
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
 
 	<section class="mt-8">
 		<div class="container mx-auto">
+			<div>${boardName } 게시판</div>
 			<div class="table-box">
 				<table class="table">
 					<thead>

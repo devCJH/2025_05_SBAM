@@ -28,9 +28,10 @@ public interface ArticleDao {
 			    FROM article a
 			    INNER JOIN `member` m
 			    ON a.memberId = m.id
+			    WHERE boardId = #{boardId}
 				ORDER BY a.id DESC
 			""")
-	public List<Article> getArticles();
+	public List<Article> getArticles(int boardId);
 	
 	@Select("""
 			SELECT a.*, m.loginId AS writerName

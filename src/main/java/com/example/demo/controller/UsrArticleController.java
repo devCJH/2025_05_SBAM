@@ -11,16 +11,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.dto.Article;
 import com.example.demo.dto.Req;
 import com.example.demo.service.ArticleService;
+import com.example.demo.service.BoardService;
 import com.example.demo.util.Util;
 
 @Controller
 public class UsrArticleController {
 	
 	private ArticleService articleService;
+	private BoardService boardService;
 	private Req req;
 	
-	public UsrArticleController(ArticleService articleService, Req req) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, Req req) {
 		this.articleService = articleService;
+		this.boardService = boardService;
 		this.req = req;
 	}
 	
@@ -41,11 +44,13 @@ public class UsrArticleController {
 	}
 	
 	@GetMapping("/usr/article/list")
-	public String list(Model model) {
+	public String list(Model model, int boardId) {
 		
-		List<Article> articles = this.articleService.getArticles();
+		List<Article> articles = this.articleService.getArticles(boardId);
+		String boardName = this.boardService.getBoardName(boardId);
 		
 		model.addAttribute("articles", articles);
+		model.addAttribute("boardName", boardName);
 		
 		return "usr/article/list";
 	}
