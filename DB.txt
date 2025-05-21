@@ -87,3 +87,9 @@ INSERT INTO board
 SELECT * FROM article;
 SELECT * FROM `member`;
 SELECT * FROM board;
+
+/* 
+페이징 테스트용 더미데이터
+insert into article (regDate, updateDate, memberId, boardId, title, content)
+select now(), now(), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 3) + 1, concat('테스트제목', substr(RAND(), 1, 5)), CONCAT('테스트내용', SUBSTR(RAND(), 1, 5)) from article;
+*/

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.Article;
@@ -45,11 +46,30 @@ public class UsrArticleController {
 	}
 	
 	@GetMapping("/usr/article/list")
-	public String list(Model model, int boardId) {
+	public String list(Model model, int boardId, @RequestParam(defaultValue = "1") int cPage) {
 		
-		List<Article> articles = this.articleService.getArticles(boardId);
+		int articlesInPage = 10;
+		int limitFrom = (cPage - 1) * articlesInPage;
+		
+		int articlesCnt = this.articleService.getArticlesCnt(boardId);
+		
+		int totalPagesCnt = (int) Math.ceil(articlesCnt / (double) articlesInPage);
+	
+		int begin = ((cPage - 1) / 10) * 10 + 1;
+		int end = (((cPage - 1) / 10) + 1) * 10;
+		
+		if (end > totalPagesCnt) {
+			end = totalPagesCnt;
+		}
+		
 		Board board = this.boardService.getBoard(boardId);
+		List<Article> articles = this.articleService.getArticles(boardId, articlesInPage, limitFrom);
 		
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("begin", begin);
+		model.addAttribute("end", end);
+		model.addAttribute("totalPagesCnt", totalPagesCnt);
+		model.addAttribute("articlesCnt", articlesCnt);
 		model.addAttribute("articles", articles);
 		model.addAttribute("board", board);
 		
@@ -87,10 +107,10 @@ public class UsrArticleController {
 	
 	@GetMapping("/usr/article/delete")
 	@ResponseBody
-	public String delete(int id) {
+	public String delete(int id, int boardId) {
 		
 		this.articleService.deleteArticle(id);
 		
-		return Util.jsReplace(String.format("%d번 게시글이 삭제되었습니다", id), "list");
+		return Util.jsReplace(String.format("%d번 게시글이 삭제되었습니다", id), String.format("list?boardId=%d", boardId));
 	}
 }

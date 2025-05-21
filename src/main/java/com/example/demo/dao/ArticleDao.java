@@ -31,8 +31,9 @@ public interface ArticleDao {
 			    ON a.memberId = m.id
 			    WHERE boardId = #{boardId}
 				ORDER BY a.id DESC
+				LIMIT #{limitFrom}, #{articlesInPage}
 			""")
-	public List<Article> getArticles(int boardId);
+	public List<Article> getArticles(int boardId, int articlesInPage, int limitFrom);
 	
 	@Select("""
 			SELECT a.*, m.loginId AS writerName
@@ -68,4 +69,11 @@ public interface ArticleDao {
 			SELECT LAST_INSERT_ID()
 			""")
 	public int getLastArticleId();
+
+	@Select("""
+			SELECT COUNT(id)
+				FROM article
+				WHERE boardId = #{boardId}
+			""")
+	public int getArticlesCnt(int boardId);
 }

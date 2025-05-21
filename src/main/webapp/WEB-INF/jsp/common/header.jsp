@@ -24,7 +24,7 @@
 		<div class="grow"></div>
 		<ul class="flex">
 			<li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/">HOME</a></li>
-            <li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/usr/article/list?boardId=1">NOTICE</a></li>
+           	<li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/usr/article/list?boardId=1">NOTICE</a></li>
 			<li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/usr/article/list?boardId=2">FREE</a></li>
 			<li class="hover:underline underline-offset-8"><a class="flex h-full px-3 items-center" href="/usr/article/list?boardId=3">QNA</a></li>
 			<c:if test="${req.getLoginedMember().getId() == 0 }">
