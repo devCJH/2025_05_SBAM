@@ -16,9 +16,9 @@ import lombok.Getter;
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Req {
-	
+
 	@Getter
-	private int loginedMemberId;
+	private LoginedMember loginedMember;
 	private HttpServletResponse resp;
 	private HttpSession session;
 	
@@ -28,13 +28,11 @@ public class Req {
 		
 		this.session = request.getSession();
 		
-		int loginedMemberId = -1;
+		this.loginedMember = (LoginedMember) session.getAttribute("loginedMember");
 		
-		if (this.session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
+		if (this.loginedMember == null) {
+			this.loginedMember = new LoginedMember();
 		}
-		
-		this.loginedMemberId = loginedMemberId;
 		
 		request.setAttribute("req", this);
 	}
@@ -42,16 +40,16 @@ public class Req {
 	public void init() {
 	}
 	
-	public void login(int loginedMemberId) {
-		this.session.setAttribute("loginedMemberId", loginedMemberId);
+	public void login(LoginedMember loginedMember) {
+		this.session.setAttribute("loginedMember", loginedMember);
 	}
 
 	public void logout() {
-		this.session.removeAttribute("loginedMemberId");
+		this.session.removeAttribute("loginedMember");
 	}
 	
 	public void jsPrintReplace(String msg, String uri) {
-		this.resp.setContentType("text/html; charset=UTF-8;");
+		this.resp.setContentType("text/html;charset=UTF-8");
 		
 		try {
 			this.resp.getWriter().append(Util.jsReplace(msg, uri));

@@ -22,6 +22,8 @@ CREATE TABLE `member`(
     , `name` VARCHAR(50) NOT NULL
 );
 
+ALTER TABLE `member` ADD COLUMN authLevel INT UNSIGNED NOT NULL DEFAULT 1 COMMENT '관리자 = 0, 사용자 = 1';
+
 CREATE TABLE board(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
     , `name` VARCHAR(50) NOT NULL
@@ -54,10 +56,18 @@ INSERT INTO article
 INSERT INTO `member`
     SET regDate = NOW()
         , updateDate = NOW()
+        , loginId = 'admin'
+        , loginPw = 'admin'
+        , `name` = '관리자'
+        , authLevel = 0;
+        
+INSERT INTO `member`
+    SET regDate = NOW()
+        , updateDate = NOW()
         , loginId = 'test1'
         , loginPw = 'test1'
         , `name` = '유저1';
-        
+
 INSERT INTO `member`
     SET regDate = NOW()
         , updateDate = NOW()

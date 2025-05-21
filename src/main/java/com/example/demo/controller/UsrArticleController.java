@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.Article;
+import com.example.demo.dto.Board;
 import com.example.demo.dto.Req;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
@@ -34,9 +35,9 @@ public class UsrArticleController {
 	
 	@PostMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(String title, String content) {
+	public String doWrite(String title, String content, int boardId) {
 		
-		this.articleService.writeArticle(title, content, this.req.getLoginedMemberId());
+		this.articleService.writeArticle(title, content, this.req.getLoginedMember().getId(), boardId);
 		
 		int id = this.articleService.getLastArticleId();
 		
@@ -47,10 +48,10 @@ public class UsrArticleController {
 	public String list(Model model, int boardId) {
 		
 		List<Article> articles = this.articleService.getArticles(boardId);
-		String boardName = this.boardService.getBoardName(boardId);
+		Board board = this.boardService.getBoard(boardId);
 		
 		model.addAttribute("articles", articles);
-		model.addAttribute("boardName", boardName);
+		model.addAttribute("board", board);
 		
 		return "usr/article/list";
 	}

@@ -3,6 +3,7 @@ package com.example.demo.service;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.BoardDao;
+import com.example.demo.dto.Board;
 
 @Service
 public class BoardService {
@@ -13,8 +14,8 @@ public class BoardService {
 		this.boardDao = boardDao;
 	}
 
-	public String getBoardName(int boardId) {
-		return this.boardDao.getBoardName(boardId);
+	public Board getBoard(int boardId) {
+		return this.boardDao.getBoard(boardId);
 	}
 
 }

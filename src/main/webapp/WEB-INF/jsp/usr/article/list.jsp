@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="${boardName } 게시판" />
+<c:set var="pageTitle" value="${board.getName() } 게시판" />
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
 
 	<section class="mt-8">
 		<div class="container mx-auto">
-			<div>${boardName } 게시판</div>
+			<div>${board.getName() } 게시판</div>
 			<div class="table-box">
 				<table class="table">
 					<thead>
@@ -32,10 +32,21 @@
 				</table>
 			</div>
 			
-			<c:if test="${req.getLoginedMemberId() != -1 }">
-				<div class="bg-white p-6">
-					<div><a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a></div>
-				</div>
+			<c:if test="${req.getLoginedMember().getId() != 0 }">
+				<c:choose>
+					<c:when test="${req.getLoginedMember().getAuthLevel() == 0 }">
+						<div class="bg-white p-6">
+							<div><a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a></div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<c:if test="${board.getId() != 1 }">
+							<div class="bg-white p-6">
+								<div><a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a></div>
+							</div>
+						</c:if>
+					</c:otherwise>
+				</c:choose>
 			</c:if>
 		</div>
 	</section>
