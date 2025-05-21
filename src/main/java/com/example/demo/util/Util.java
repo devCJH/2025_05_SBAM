@@ -16,10 +16,14 @@ public class Util {
 						const msg = '%s'.trim();
 						
 						if (msg.length > 0) {
-							alert(msg);
+							requestAnimationFrame(() => {
+								alert(msg);
+							})
 						}
 						
-						location.replace('%s');
+						setTimeout(() => {
+							location.replace('%s');
+						}, 100);
 					</script>
 				""", msg, uri);
 	}
