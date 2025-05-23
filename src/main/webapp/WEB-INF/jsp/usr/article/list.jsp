@@ -10,7 +10,34 @@
 		<div class="container mx-auto">
 			<div class="ml-8 mb-2">
 				<div><span>${board.getName() } 게시판</span></div>
-				<div><span>총 : ${articlesCnt }개</span></div>
+				<div class="flex justify-between">
+					<div><span>총 : ${articlesCnt }개</span></div>
+					<div class="mr-10">
+						<form>
+							<input type="hidden" name="boardId" value="${board.getId() }" />
+							<select style="width:100px;" class="select select-sm" name="searchType">
+								<option value="title" <c:if test="${searchType == 'title' }">selected</c:if>>제목</option>
+								<option value="content" <c:if test="${searchType == 'content' }">selected</c:if>>내용</option>
+								<option value="title,content" <c:if test="${searchType == 'title,content' }">selected</c:if>>제목 + 내용</option>
+							</select>
+							<label style="width:200px;" class="input input-sm">
+							  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+							    <g
+							      stroke-linejoin="round"
+							      stroke-linecap="round"
+							      stroke-width="2.5"
+							      fill="none"
+							      stroke="currentColor"
+							    >
+							      <circle cx="11" cy="11" r="8"></circle>
+							      <path d="m21 21-4.3-4.3"></path>
+							    </g>
+							  </svg>
+							  <input type="search" name="searchKeyword" placeholder="검색어를 입력하세요" maxlength="25" value="${searchKeyword }" />
+							</label>
+						</form>
+					</div>
+				</div>
 			</div>
 			<div class="table-box">
 				<table class="table">
@@ -44,7 +71,7 @@
 					</c:when>
 					<c:otherwise>
 						<c:if test="${board.getId() != 1 }">
-							<div class="bg-white px-6 pt-6"">
+							<div class="bg-white px-6 pt-6">
 								<div class="text-right"><a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a></div>
 							</div>
 						</c:if>
@@ -54,7 +81,7 @@
 			
 			<div class="flex justify-center mb-8 mt-4">
 				<div class="join">
-					<c:set var="queryString" value="?boardId=${board.getId() }" />
+					<c:set var="queryString" value="?boardId=${board.getId() }&searchType=${searchType }&searchKeyword=${searchKeyword }" />
 					
 					<c:if test="${begin != 1 }">
 						<a class="join-item btn btn-sm" href="${queryString }&cPage=1"><i class="fa-solid fa-angles-left"></i></a>
