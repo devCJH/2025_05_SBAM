@@ -47,6 +47,8 @@
 							<th>제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
+							<th>추천수</th>
+							<th>조회수</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -56,6 +58,8 @@
 								<td class="hover:underline underline-offset-4"><a href="detail?id=${article.getId() }">${article.getTitle() }</a></td>
 								<td>${article.getWriterName() }</td>
 								<td>${article.getRegDate().substring(2, 16) }</td>
+								<td>${article.getLikePoint() }</td>
+								<td>${article.getViews() }</td>
 							</tr>
 						</c:forEach>
 					</tbody>

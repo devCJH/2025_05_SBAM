@@ -26,10 +26,15 @@ public interface ArticleDao {
 
 	@Select("""
 			<script>
-			SELECT a.*, m.loginId AS writerName
+			SELECT a.*
+					, m.loginId AS writerName
+					, COUNT(l.memberId) AS `likePoint`
 			    FROM article a
 			    INNER JOIN `member` m
 			    ON a.memberId = m.id
+			    LEFT JOIN likePoint l
+			    ON l.relTypeCode = 'article'
+			    AND l.relId = a.id
 			    WHERE a.boardId = #{boardId}
 			    <if test="searchKeyword != ''">
 			    	<choose>
@@ -47,6 +52,7 @@ public interface ArticleDao {
 					    </otherwise>
 			    	</choose>
 			    </if>
+			    GROUP BY a.id
 				ORDER BY a.id DESC
 				LIMIT #{limitFrom}, #{articlesInPage}
 			</script>
@@ -106,4 +112,11 @@ public interface ArticleDao {
 			</script>
 			""")
 	public int getArticlesCnt(int boardId, String searchType, String searchKeyword);
+
+	@Update("""
+			UPDATE article
+				SET views = views + 1
+				WHERE id = #{id}
+			""")
+	public void increaseViews(int id);
 }

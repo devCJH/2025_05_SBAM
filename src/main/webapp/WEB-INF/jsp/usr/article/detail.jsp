@@ -74,12 +74,16 @@
 								<span id="likePointCnt"></span>
 							</c:if>
 							<c:if test="${req.getLoginedMember().getId() != 0 }">
-								<button onclick="clickLikePoint();">
+								<button class="btn btn-neutral btn-outline btn-xs" onclick="clickLikePoint();">
 									<span id="likePointCnt"></span>
 									<span id="likePointBtn"></span>
 								</button>
 							</c:if>
 						</td>
+					</tr>
+					<tr>
+						<th>조회수</th>
+						<td>${article.getViews() }</td>
 					</tr>
 					<tr>
 						<th>작성자</th>
