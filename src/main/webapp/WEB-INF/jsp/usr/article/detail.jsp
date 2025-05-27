@@ -49,6 +49,33 @@
 				}
 			})
 		}
+		
+		const writeReply = function () {
+			let replyContent = $('#replyContent');
+			
+			if (replyContent.val().length == 0) {
+				alert('내용이 없는 댓글은 작성할 수 없습니다');
+				replyContent.focus();
+				return;
+			}
+			
+			$.ajax({
+				url : '/usr/reply/doWrite',
+				type : 'POST',
+				data : {
+					relTypeCode : 'article',
+					relId : ${article.getId() },
+					content : replyContent.val()
+				},
+				dataType : 'text',
+				success : function (data) {
+					console.log(data);
+				},
+				error : function (xhr, status, error) {
+					console.log(error);
+				}
+			})
+		}
 	</script>
 
 	<section class="mt-8">
@@ -112,7 +139,7 @@
 		</div>
 	</section>
 	
-	<section class="mt-4">
+	<section class="my-4">
 		<div class="container mx-auto">
 			<div>
 				<c:forEach var="reply" items="${replies }">
@@ -122,31 +149,16 @@
 				</c:forEach>
 			</div>
 			
-			<script>
-				const writeReply = function () {
-					$.ajax({
-						url : '/usr/reply/doWrite',
-						type : 'POST',
-						data : {
-							relTypeCode : 'article',
-							relId : ${article.getId() },
-							content : $('#replyContent').val()
-						},
-						dataType : 'text',
-						success : function (data) {
-							console.log(data);
-						},
-						error : function (xhr, status, error) {
-							console.log(error);
-						}
-					})
-				}
-			</script>
-			
 			<div>
-				<div>닉네임</div>
-				<textarea id="replyContent"></textarea>
-				<button onclick="writeReply();">등록</button>
+				<c:if test="${req.getLoginedMember().getId() != 0 }">
+					<div class="border-2 border-gray-200 rounded-xl px-4 mt-2">
+						<div class="mt-3 mb-2 font-semibold text-sm">닉네임</div>
+						<textarea style="width: 100%; resize: none;" id="replyContent" class="textarea"></textarea>
+						<div class="flex justify-end my-2">
+							<button class="btn btn-neutral btn-outline btn-xs" onclick="writeReply();">등록</button>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</section>
