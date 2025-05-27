@@ -112,4 +112,43 @@
 		</div>
 	</section>
 	
+	<section class="mt-4">
+		<div class="container mx-auto">
+			<div>
+				<c:forEach var="reply" items="${replies }">
+					<div>${reply.getMemberId() }</div>
+					<div>${reply.getContent() }</div>
+					<hr />
+				</c:forEach>
+			</div>
+			
+			<script>
+				const writeReply = function () {
+					$.ajax({
+						url : '/usr/reply/doWrite',
+						type : 'POST',
+						data : {
+							relTypeCode : 'article',
+							relId : ${article.getId() },
+							content : $('#replyContent').val()
+						},
+						dataType : 'text',
+						success : function (data) {
+							console.log(data);
+						},
+						error : function (xhr, status, error) {
+							console.log(error);
+						}
+					})
+				}
+			</script>
+			
+			<div>
+				<div>닉네임</div>
+				<textarea id="replyContent"></textarea>
+				<button onclick="writeReply();">등록</button>
+			</div>
+		</div>
+	</section>
+	
 <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
