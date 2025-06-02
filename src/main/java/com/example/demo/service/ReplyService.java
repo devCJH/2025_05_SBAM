@@ -24,4 +24,20 @@ public class ReplyService {
 		return this.replyDao.getReplies(relTypeCode, relId);
 	}
 
+	public int getLastInsertReplyId() {
+		return this.replyDao.getLastInsertReplyId();
+	}
+
+	public Reply getReplyById(int id) {
+		return this.replyDao.getReplyById(id);
+	}
+
+	public void deleteReply(int id) {
+		this.replyDao.deleteReply(id);
+	}
+
+	public void modifyReply(int id, String content) {
+		this.replyDao.modifyReply(id, content);
+	}
+
 }

@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.Article;
 import com.example.demo.dto.Board;
-import com.example.demo.dto.Reply;
 import com.example.demo.dto.Req;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
-import com.example.demo.service.ReplyService;
 import com.example.demo.util.Util;
 
 import jakarta.servlet.http.Cookie;
@@ -26,13 +24,11 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UsrArticleController {
 
 	private ArticleService articleService;
-	private ReplyService replyService;
 	private BoardService boardService;
 	private Req req;
 
-	public UsrArticleController(ArticleService articleService, ReplyService replyService, BoardService boardService, Req req) {
+	public UsrArticleController(ArticleService articleService, BoardService boardService, Req req) {
 		this.articleService = articleService;
-		this.replyService = replyService;
 		this.boardService = boardService;
 		this.req = req;
 	}
@@ -113,10 +109,7 @@ public class UsrArticleController {
 		
 		Article article = this.articleService.getArticleById(id);
 		
-		List<Reply> replies = this.replyService.getReplies("article", id);
-		
 		model.addAttribute("article", article);
-		model.addAttribute("replies", replies);
 
 		return "usr/article/detail";
 	}
