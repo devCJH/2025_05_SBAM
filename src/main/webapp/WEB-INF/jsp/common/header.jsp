@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="/resource/common.css" />
 <meta charset="UTF-8">
 <title>${pageTitle }</title>
+<link rel="shortcut icon" href="/resource/images/favicon.ico" />
 </head>
 <body>
 
