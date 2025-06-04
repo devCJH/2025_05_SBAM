@@ -69,13 +69,13 @@
 			<c:if test="${req.getLoginedMember().getId() != 0 }">
 				<c:choose>
 					<c:when test="${req.getLoginedMember().getAuthLevel() == 0 }">
-						<div class="bg-white px-6 pt-6">
+						<div class="px-6 pt-6">
 							<div class="text-right"><a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a></div>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<c:if test="${board.getId() != 1 }">
-							<div class="bg-white px-6 pt-6">
+							<div class="px-6 pt-6">
 								<div class="text-right"><a class="btn btn-neutral btn-outline btn-xs" href="write">글쓰기</a></div>
 							</div>
 						</c:if>

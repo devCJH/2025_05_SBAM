@@ -34,7 +34,7 @@
 							<th>내용</th>
 							<td>
 								<div id="toast-ui-editor">
-									<script>${article.getContent() }</script>
+									<div>${article.getContent() }</div>
 								</div>
 							</td>
 						</tr>
@@ -45,7 +45,7 @@
 				</div>
 			</form>
 			
-			<div class="bg-white p-6">
+			<div class="p-6">
 				<div><button class="btn btn-neutral btn-outline btn-xs" onclick="history.back();">뒤로가기</button></div>
 			</div>
 		</div>

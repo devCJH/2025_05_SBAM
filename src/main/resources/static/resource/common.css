@@ -18,4 +18,5 @@ html * {
 
 .ProseMirror div, .toastui-editor-contents p {
 	font-size: 1.5rem;
+	text-align: left;
 }
