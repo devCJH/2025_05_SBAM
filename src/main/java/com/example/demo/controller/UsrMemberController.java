@@ -32,7 +32,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doJoin(String loginId, String loginPw, String name) {
 		
-		this.memberService.joinMember(loginId, loginPw, name);
+		this.memberService.joinMember(loginId, Util.encryptSHA256(loginPw), name);
 		
 		return Util.jsReplace(String.format("[ %s ] 님의 가입이 완료되었습니다", name), "/");
 	}
@@ -65,7 +65,7 @@ public class UsrMemberController {
 			return Util.jsReplace(String.format("[ %s ] 은(는) 존재하지 않는 회원입니다", loginId), "login");
 		}
 		
-		if (member.getLoginPw().equals(loginPw) == false) {
+		if (member.getLoginPw().equals(Util.encryptSHA256(loginPw)) == false) {
 			return Util.jsReplace("비밀번호가 일치하지 않습니다", "login");
 		}
 		
