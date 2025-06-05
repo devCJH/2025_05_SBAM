@@ -6,10 +6,67 @@
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
 
+	<script>
+		let stompClient = null;
+
+	    const connect = function () {
+	    	let userId = $('#sender').text();
+	    	let socket = new SockJS('/ws-stomp');
+			stompClient = Stomp.over(socket);
+			
+			stompClient.connect({}, function (frame) {
+				stompClient.subscribe('/sub/' + userId, function (message) {
+					let notificationDiv = $('#notifications');
+					notificationDiv.append(`<div>\${message.body }</div>`);
+				})
+			})
+	    }
+	    
+	    const sendMessage = function () {
+	    	let recipient = $('#recipient').val();
+	    	let content = $('#content').val();
+	    	let message = {
+	            recipient: recipient,
+	            content: content
+	        };
+	        stompClient.send("/pub/send", {}, JSON.stringify(message));
+	    }
+	
+	    $(function () {
+	        connect();
+	        $('#sendNotification').click(function () {
+	            sendMessage();
+	        });
+	    });
+		
+	</script>
+
 	<section class="mt-8">
 		<div class="container mx-auto">
 			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex quam similique assumenda libero eligendi magni nulla officia doloremque sit nisi animi quaerat hic voluptatibus possimus necessitatibus nemo consectetur molestiae pariatur?</div>
 			<div>안녕하세요</div>
+		</div>
+		
+		<hr />
+		
+		<div>
+			<div>알림테스트</div>
+			<div>현재 로그인된 회원의 ID : <span id="sender">${req.getLoginedMember().getId() }</span></div>
+			<label>
+				알림을 받을 사용자 ID : 
+				<input class="input input-bordered" id="recipient" type="text">
+			</label>
+			<br />
+			<label>
+				알림으로 보낼 메시지 : 
+				<input class="input input-bordered" id="content" type="text">
+			</label>
+			<br />
+			
+			<button id="sendNotification">알림 보내기</button>
+			
+			<div>알림으로 받은 메시지 내용</div>
+			<div id="notifications"></div>
 		</div>
 	</section>
 
