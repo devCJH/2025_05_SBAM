@@ -86,7 +86,7 @@ public class UsrArticleController {
 	}
 
 	@GetMapping("/usr/article/detail")
-	public Object detail(HttpServletRequest request, HttpServletResponse response, Model model, int id) {
+	public String detail(HttpServletRequest request, HttpServletResponse response, Model model, int id) {
 
 		Cookie[] cookies = request.getCookies();
 		boolean isViewed = false;
