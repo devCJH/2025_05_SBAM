@@ -21,8 +21,8 @@ public class MemberService {
 		this.javaMailSender = javaMailSender;
 	}
 
-	public void joinMember(String loginId, String loginPw, String name) {
-		this.memberDao.joinMember(loginId, loginPw, name);
+	public void joinMember(String loginId, String loginPw, String name, String email) {
+		this.memberDao.joinMember(loginId, loginPw, name, email);
 	}
 
 	public Member getMemberByLoginId(String loginId) {
@@ -37,8 +37,8 @@ public class MemberService {
 		return memberDao.getMemberByNameAndEmail(name, email);
 	}
 
-	public void modifyPassword(int loginedMemberId, String loginPw) {
-		this.memberDao.modifyPassword(loginedMemberId, loginPw);
+	public void modifyPassword(int id, String loginPw) {
+		this.memberDao.modifyPassword(id, loginPw);
 	}
 	
 	public void sendEmail(String to, String subject, String text) {
@@ -66,4 +66,12 @@ public class MemberService {
                     + "</html>";
         sendEmail(member.getEmail(), subject, text);
     }
+
+	public Member getMemberById(int id) {
+		return this.memberDao.getMemberById(id);
+	}
+
+	public void modifyMember(int id, String name, String email) {
+		this.memberDao.modifyMember(id, name, email);
+	}
 }

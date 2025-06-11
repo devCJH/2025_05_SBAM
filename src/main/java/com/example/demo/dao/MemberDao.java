@@ -17,8 +17,9 @@ public interface MemberDao {
 			        , loginId = #{loginId}
 			        , loginPw = #{loginPw}
 			        , `name` = #{name}
+			        , email = #{email}
 			""")
-	void joinMember(String loginId, String loginPw, String name);
+	void joinMember(String loginId, String loginPw, String name, String email);
 
 	@Select("""
 			SELECT *
@@ -46,7 +47,23 @@ public interface MemberDao {
 			UPDATE `member`
 				SET updateDate = NOW()
 					, loginPw = #{loginPw}
+				WHERE id = #{id}
+			""")
+	void modifyPassword(int id, String loginPw);
+	
+	@Select("""
+			SELECT *
+				FROM `member`
 				WHERE id = #{loginedMemberId}
 			""")
-	void modifyPassword(int loginedMemberId, String loginPw);
+	Member getMemberById(int id);
+
+	@Update("""
+			UPDATE `member`
+				SET updateDate = NOW()
+					, name = #{name}
+					, email = #{email}
+				WHERE id = #{id}
+			""")
+	void modifyMember(int id, String name, String email);
 }

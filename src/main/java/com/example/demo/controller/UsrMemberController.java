@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,9 +31,9 @@ public class UsrMemberController {
 	
 	@PostMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String name) {
+	public String doJoin(String loginId, String loginPw, String name, String email) {
 		
-		this.memberService.joinMember(loginId, Util.encryptSHA256(loginPw), name);
+		this.memberService.joinMember(loginId, Util.encryptSHA256(loginPw), name, email);
 		
 		return Util.jsReplace(String.format("[ %s ] 님의 가입이 완료되었습니다", name), "/");
 	}
@@ -137,5 +138,37 @@ public class UsrMemberController {
 		this.memberService.modifyPassword(member.getId(), Util.encryptSHA256(tempPassword));
 		
 		return ResultData.from("S-1", "회원님의 이메일주소로 임시 패스워드가 발송되었습니다");
+	}
+	
+	@GetMapping("/usr/member/myPage")
+	public String myPage(Model model) {
+		
+		Member member = this.memberService.getMemberById(this.req.getLoginedMember().getId());
+		
+		model.addAttribute("member", member);
+		
+		return "usr/member/myPage";
+	}
+
+	@GetMapping("/usr/member/modify")
+	public String modify(int id, String name, String email) {
+		
+		this.memberService.modifyMember(id, name, email);
+		
+		return "redirect:/usr/member/myPage";
+	}
+	
+	@GetMapping("/usr/member/modifyPwPop")
+	public String modifyPwPop() {
+		return "usr/member/modifyPwPop";
+	}
+	
+	@PostMapping("/usr/member/doModifyPw")
+	@ResponseBody
+	public String doModifyPw(String loginPw) {
+		
+		this.memberService.modifyPassword(req.getLoginedMember().getId(), Util.encryptSHA256(loginPw));
+		
+		return "비밀번호 변경이 완료되었습니다";
 	}
 }
