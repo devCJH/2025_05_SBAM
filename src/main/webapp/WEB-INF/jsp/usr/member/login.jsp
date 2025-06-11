@@ -84,8 +84,12 @@
 				</div>
 			</form>
 			
-			<div class="p-6">
+			<div class="p-6 flex justify-between">
 				<div><button class="btn btn-neutral btn-outline btn-xs" onclick="history.back();">뒤로가기</button></div>
+				<div class="flex">
+					<div class="mr-2"><a class="btn btn-neutral btn-outline btn-xs" href="findLoginId">아이디 찾기</a></div>
+					<div><a class="btn btn-neutral btn-outline btn-xs" href="findLoginPw">비밀번호 찾기</a></div>
+				</div>
 			</div>
 		</div>
 	</section>

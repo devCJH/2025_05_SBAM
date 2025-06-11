@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.dto.Member;
 
@@ -33,4 +34,19 @@ public interface MemberDao {
 			""")
 	String getLoginId(int id);
 	
+	@Select("""
+			SELECT *
+				FROM `member`
+				WHERE `name` = #{name}
+				AND email = #{email}
+			""")
+	Member getMemberByNameAndEmail(String name, String email);
+
+	@Update("""
+			UPDATE `member`
+				SET updateDate = NOW()
+					, loginPw = #{loginPw}
+				WHERE id = #{loginedMemberId}
+			""")
+	void modifyPassword(int loginedMemberId, String loginPw);
 }
